@@ -17,8 +17,11 @@ const state = {
   actions: {
     timerId: setInterval(randomSquare, 700),
     countDownTimerId: setInterval(countDown, 1000),
+    buttonReiniciar: document.querySelector("#reiniciar"),
   },
-};
+}
+
+state.actions.buttonReiniciar.addEventListener("click", gameEnd)
 
 function countDown() {
   state.values.curretTime--
@@ -30,23 +33,26 @@ function countDown() {
 }
 
 function playSound(audioName) {
-  let audio = new Audio(`./src/audios/${audioName}.m4a`)
+  let audio = new Audio(`./src/audios/${audioName}.mp3`)
   audio.volume = 0.2
   audio.play()
 }
 
 function randomSquare() {
-  state.view.squares.forEach((square) => {
-    square.classList.remove("enemy")
-  })
-  state.view.squares.forEach((square) => {
-    square.classList.remove("hit")
-  })
+  removeClass()
 
   let randomNumber = Math.floor(Math.random() * 9)
   let randomSquare = state.view.squares[randomNumber]
   randomSquare.classList.add("enemy")
   state.values.hitPosition = randomSquare.id
+}
+
+function removeClass() {
+  state.view.squares.forEach((square) => {
+    square.classList.remove("error")
+    square.classList.remove("enemy")
+    square.classList.remove("hit")
+  })
 }
 
 function addListenerHitBox() {
@@ -63,6 +69,8 @@ function addListenerHitBox() {
       else {
         state.values.live--
         state.view.lives.textContent = state.values.live
+        playSound('error')
+        square.classList.add("error")
         verifyLives()
       }
     })
@@ -79,6 +87,8 @@ function gameEnd() {
   clearInterval(state.actions.countDownTimerId)
   clearInterval(state.actions.timerId)
 
+  removeClass()
+
   const modal = document.createElement('div')
   modal.classList.add('modal')
 
@@ -86,7 +96,7 @@ function gameEnd() {
   message.textContent = 'Game Over! Seu resultado foi: ' + state.values.result
 
   const restartButton = document.createElement('button')
-  restartButton.textContent = 'Reiniciar Jogo'
+  restartButton.textContent = 'Novo Jogo'
   restartButton.addEventListener('click', reiniciarGame)
 
   modal.appendChild(message)
@@ -112,7 +122,6 @@ function reiniciarGame() {
   state.actions.timerId = setInterval(randomSquare, 700)
   state.actions.countDownTimerId = setInterval(countDown, 1000)
 }
-
 
 function initialize() {
   addListenerHitBox()

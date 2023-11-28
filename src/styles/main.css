@@ -18,7 +18,7 @@
 }
 
 .panel {
-  margin-top: 1rem;
+  margin: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,6 +38,11 @@
 
 .hit {
   background-image: url("../images/hit.png");
+  background-size: cover;
+}
+
+.error {
+  background-image: url("../images/error.png");
   background-size: cover;
 }
 
@@ -75,4 +80,33 @@
   padding: 10px;
   color: #ffffff;
   background-color: #1aeaa5;
+  cursor: pointer;
+  text-align: center;
+}
+
+#reiniciar {
+  padding: 10px;
+  color: #ffffff;
+  background-color: #1aeaa5;
+  cursor: pointer;
+}
+
+@media (max-width: 769px) {
+  .square {
+    height: 95px;
+    width: 95px;
+  }
+
+  h2 {
+    font-size: .75rem;
+  }
+
+  .menu {
+    height: 150px;
+    flex-wrap: wrap;
+  }
+
+  .modal {
+    height: 150px;
+  }
 }
