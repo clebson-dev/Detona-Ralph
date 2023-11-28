@@ -84,6 +84,14 @@
   text-align: center;
 }
 
+.lock {
+  position: fixed;
+  top: 90px;
+  background-color: hsla(0, 0%, 0%, 0.288);
+  width: 100%;
+  height: 100%;
+}
+
 #reiniciar {
   padding: 10px;
   color: #ffffff;
@@ -108,5 +116,9 @@
 
   .modal {
     height: 150px;
+  }
+
+  .lock {
+    top: 150px;
   }
 }

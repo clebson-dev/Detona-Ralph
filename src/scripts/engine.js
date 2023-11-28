@@ -1,3 +1,4 @@
+let timeRandom = 1000
 const state = {
   view: {
     squares: document.querySelectorAll(".square"),
@@ -6,6 +7,7 @@ const state = {
     timeLeft: document.querySelector("#time-left"),
     score: document.querySelector("#score"),
     lives: document.querySelector("#lives"),
+    lock: document.querySelector("#lock")
   },
   values: {
     gameVelocity: 1000,
@@ -15,11 +17,20 @@ const state = {
     live: 3,
   },
   actions: {
-    timerId: setInterval(randomSquare, 700),
+    timerId: setInterval(randomSquare, timeRandom),
     countDownTimerId: setInterval(countDown, 1000),
     buttonReiniciar: document.querySelector("#reiniciar"),
   },
 }
+
+function intervaloAleatorio() {
+  const intervalos = [100, 200, 400]
+  const indice = Math.floor(Math.random() * intervalos.length)
+  
+  const intervaloSelecionado = intervalos[indice]
+  return intervaloSelecionado  
+}
+
 
 state.actions.buttonReiniciar.addEventListener("click", gameEnd)
 
@@ -45,6 +56,7 @@ function randomSquare() {
   let randomSquare = state.view.squares[randomNumber]
   randomSquare.classList.add("enemy")
   state.values.hitPosition = randomSquare.id
+  console.log('novo timer' + timeRandom)
 }
 
 function removeClass() {
@@ -65,12 +77,15 @@ function addListenerHitBox() {
         playSound("hit")
         square.classList.remove("enemy")
         square.classList.add("hit")
+        timeRandom = intervaloAleatorio()
+
       }
       else {
         state.values.live--
         state.view.lives.textContent = state.values.live
         playSound('error')
         square.classList.add("error")
+        timeRandom = intervaloAleatorio()
         verifyLives()
       }
     })
@@ -84,6 +99,7 @@ function verifyLives() {
 }
 
 function gameEnd() {
+  state.view.lock.classList.add("lock")
   clearInterval(state.actions.countDownTimerId)
   clearInterval(state.actions.timerId)
 
@@ -121,6 +137,7 @@ function reiniciarGame() {
 
   state.actions.timerId = setInterval(randomSquare, 700)
   state.actions.countDownTimerId = setInterval(countDown, 1000)
+  state.view.lock.classList.remove("lock")
 }
 
 function initialize() {
