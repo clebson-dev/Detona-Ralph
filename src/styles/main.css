@@ -36,6 +36,11 @@
   background-size: cover;
 }
 
+.girl {
+  background-image: url("../images/girl.png");
+  background-size: cover;
+}
+
 .hit {
   background-image: url("../images/hit.png");
   background-size: cover;

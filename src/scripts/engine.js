@@ -1,4 +1,4 @@
-let timeRandom = 1000
+let timeRandom = 500
 const state = {
   view: {
     squares: document.querySelectorAll(".square"),
@@ -24,11 +24,20 @@ const state = {
 }
 
 function intervaloAleatorio() {
-  const intervalos = [100, 200, 400]
+  const intervalos = [50, 100, 150, 200,]
   const indice = Math.floor(Math.random() * intervalos.length)
   
   const intervaloSelecionado = intervalos[indice]
   return intervaloSelecionado  
+}
+
+function PersonagemAleatorio() {
+  const chance = Math.random();
+  if (chance < 0.3) {
+    return "girl"; 
+  } else {
+    return "enemy";
+  } 
 }
 
 
@@ -54,15 +63,15 @@ function randomSquare() {
 
   let randomNumber = Math.floor(Math.random() * 9)
   let randomSquare = state.view.squares[randomNumber]
-  randomSquare.classList.add("enemy")
+  randomSquare.classList.add(PersonagemAleatorio())
   state.values.hitPosition = randomSquare.id
-  console.log('novo timer' + timeRandom)
 }
 
 function removeClass() {
   state.view.squares.forEach((square) => {
     square.classList.remove("error")
     square.classList.remove("enemy")
+    square.classList.remove("girl")
     square.classList.remove("hit")
   })
 }
@@ -70,7 +79,7 @@ function removeClass() {
 function addListenerHitBox() {
   state.view.squares.forEach((square) => {
     square.addEventListener("mousedown", () => {
-      if (square.id === state.values.hitPosition) {
+      if (square.id === state.values.hitPosition && square.classList.contains("enemy")) {
         state.values.result++
         state.view.score.textContent = state.values.result
         state.values.hitPosition = null
@@ -78,8 +87,21 @@ function addListenerHitBox() {
         square.classList.remove("enemy")
         square.classList.add("hit")
         timeRandom = intervaloAleatorio()
-
       }
+
+      else if (square.id === state.values.hitPosition && square.classList.contains("girl")) {
+        if (state.values.result > 0) {
+          state.values.result--
+          state.view.score.textContent = state.values.result
+          state.values.hitPosition = null
+        }
+
+        playSound("girlScream")
+        square.classList.remove("girl")
+        square.classList.add("error")
+        timeRandom = intervaloAleatorio()
+      }
+
       else {
         state.values.live--
         state.view.lives.textContent = state.values.live
