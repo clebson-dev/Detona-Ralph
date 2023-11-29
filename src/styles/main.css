@@ -175,4 +175,8 @@
     top: 150px;
     z-index: 2;
   }
+
+  #cursor {
+    opacity: 0;
+  }
 }
