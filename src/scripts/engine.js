@@ -44,7 +44,7 @@ function intervaloAleatorio() {
 
 function PersonagemAleatorio() {
   const chance = Math.random();
-  if (chance < 0.40 && chance > 0.03) {
+  if (chance < 0.30 && chance > 0.03) {
     return "girl";
   }
   
