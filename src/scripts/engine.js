@@ -117,7 +117,7 @@ function addListenerHitBox() {
         timeRandom = intervaloAleatorio()
       }
 
-      else if (square.id === state.values.hitPosition && square.classList.contains("heart")) {
+      else if (square.id === state.values.hitPosition && square.classList.contains("heart") && state.values.live < 5) {
         if (state.values.live < 5) {
           state.values.live++
           state.view.lives.textContent = state.values.live
