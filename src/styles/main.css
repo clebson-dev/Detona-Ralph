@@ -163,5 +163,6 @@
 
   .modalExplicativo {
     top: 150px;
+    z-index: 2;
   }
 }
