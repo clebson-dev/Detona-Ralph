@@ -216,7 +216,7 @@ function modalExplicativo() {
   mensagemExplicativo1.textContent = 'Atinja Ralph e marque 1 ponto.'
   
   let mensagemExplicativo2 = document.createElement('p')
-  mensagemExplicativo2.textContent = 'não atinja a garoto ou perderá 1 ponto.'
+  mensagemExplicativo2.textContent = 'Atinja a garota e perderá 1 ponto.'
   
   let mensagemExplicativo3 = document.createElement('p')
   mensagemExplicativo3.textContent = 'Se errar o Ralph perderá 1 vida.'
