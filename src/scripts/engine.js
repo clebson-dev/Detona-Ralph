@@ -23,6 +23,15 @@ const state = {
   },
 }
 
+const cursor = document.getElementById('cursor');
+const cursorWidth = cursor.offsetWidth;
+const cursorHeight = cursor.offsetHeight;
+
+document.addEventListener('mousemove', (e) => {
+  cursor.style.left = `${e.clientX - cursorWidth / 2}px`;
+  cursor.style.top = `${e.clientY - cursorHeight / 2}px`;
+})
+
 modalExplicativo()
 
 function intervaloAleatorio() {

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Div como Cursor no Centro</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      cursor: none; /* Esconde o cursor padrão */
+    }
+    #cursor {
+      width: 40px;
+      height: 40px;
+      background-color: red;
+      position: absolute;
+      border-radius: 50%; /* Formato de círculo */
+      pointer-events: none; /* Permite que o cursor passe por cima de outros elementos */
+      transform: translate(0%, 0%); /* Para posicionar o centro do cursor no centro do mouse */
+    }
+  </style>
+</head>
+<body>
+  <div id="custom-cursor"></div>
+  
+  <!-- Seu conteúdo -->
+  <div>
+    <!-- Seu conteúdo aqui -->
+  </div>
+
+  <script>
+    const cursor = document.getElementById('custom-cursor');
+    const cursorWidth = cursor.offsetWidth;
+    const cursorHeight = cursor.offsetHeight;
+
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = `${e.clientX - cursorWidth / 2}px`;
+      cursor.style.top = `${e.clientY - cursorHeight / 2}px`;
+    });
+  </script>
+</body>
+</html>
+
