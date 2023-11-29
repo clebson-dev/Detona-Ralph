@@ -53,6 +53,12 @@
   background-size: cover;
 }
 
+.heart {
+  background-image: url(../images/heart.png);
+  background-size: cover;
+  margin: auto;
+}
+
 .menu-lives {
   display: flex;
   align-items: center;

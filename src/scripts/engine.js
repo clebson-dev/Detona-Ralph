@@ -33,10 +33,16 @@ function intervaloAleatorio() {
 
 function PersonagemAleatorio() {
   const chance = Math.random();
-  if (chance < 0.3) {
-    return "girl"; 
-  } else {
-    return "enemy";
+  if (chance < 0.6 && chance > 0.05) {
+    return "girl";
+  }
+  
+  else if (chance <= 0.05) {
+    return "heart"
+  }
+  
+  else {
+    return "enemy"
   } 
 }
 
@@ -72,6 +78,7 @@ function removeClass() {
     square.classList.remove("error")
     square.classList.remove("enemy")
     square.classList.remove("girl")
+    square.classList.remove("heart")
     square.classList.remove("hit")
   })
 }
@@ -99,6 +106,18 @@ function addListenerHitBox() {
         playSound("girlScream")
         square.classList.remove("girl")
         square.classList.add("error")
+        timeRandom = intervaloAleatorio()
+      }
+
+      else if (square.id === state.values.hitPosition && square.classList.contains("heart")) {
+        if (state.values.live < 5) {
+          state.values.live++
+          state.view.lives.textContent = state.values.live
+        }
+
+        playSound("heart")
+        square.classList.remove("heart")
+        square.classList.add("hit")
         timeRandom = intervaloAleatorio()
       }
 
