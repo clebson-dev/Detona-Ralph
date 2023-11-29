@@ -1,4 +1,4 @@
-let timeRandom = 700
+let timeRandom = 500
 const state = {
   view: {
     squares: document.querySelectorAll(".square"),
@@ -183,7 +183,7 @@ function reiniciarGame() {
     modal.remove()
   }
 
-  state.actions.timerId = setInterval(randomSquare, 700)
+  state.actions.timerId = setInterval(randomSquare, 500)
   state.actions.countDownTimerId = setInterval(countDown, 1000)
   state.view.lock.classList.remove("lock")
 }
