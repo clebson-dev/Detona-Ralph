@@ -23,8 +23,10 @@ const state = {
   },
 }
 
+modalExplicativo()
+
 function intervaloAleatorio() {
-  const intervalos = [50, 100, 150, 200,]
+  const intervalos = [100, 150, 200,]
   const indice = Math.floor(Math.random() * intervalos.length)
   
   const intervaloSelecionado = intervalos[indice]
@@ -33,11 +35,11 @@ function intervaloAleatorio() {
 
 function PersonagemAleatorio() {
   const chance = Math.random();
-  if (chance < 0.6 && chance > 0.05) {
+  if (chance < 0.40 && chance > 0.03) {
     return "girl";
   }
   
-  else if (chance <= 0.05) {
+  else if (chance <= 0.03) {
     return "heart"
   }
   
@@ -45,9 +47,6 @@ function PersonagemAleatorio() {
     return "enemy"
   } 
 }
-
-
-state.actions.buttonReiniciar.addEventListener("click", gameEnd)
 
 function countDown() {
   state.values.curretTime--
@@ -181,8 +180,60 @@ function reiniciarGame() {
   state.view.lock.classList.remove("lock")
 }
 
+function createButtonReiniciar() {
+  let menu = document.querySelector(".menu")
+
+  let buttonReiniciar = document.createElement("button")
+  buttonReiniciar.textContent = "Reiniciar Jogo"
+  buttonReiniciar.id = "reiniciar"
+  buttonReiniciar.addEventListener("mousedown",()=> {
+    gameEnd()
+  })
+
+  menu.appendChild(buttonReiniciar)
+}
+
+function modalExplicativo() {
+  clearInterval(state.actions.countDownTimerId)
+  clearInterval(state.actions.timerId)
+  removeClass()
+
+
+
+  let modalExplicativo = document.createElement('div')
+  modalExplicativo.classList.add('modalExplicativo')
+
+  let mensagemExplicativo1 = document.createElement('p')
+  mensagemExplicativo1.textContent = 'Atinja Ralph e marque 1 ponto.'
+  
+  let mensagemExplicativo2 = document.createElement('p')
+  mensagemExplicativo2.textContent = 'não atinja a garoto ou perderá 1 ponto.'
+  
+  let mensagemExplicativo3 = document.createElement('p')
+  mensagemExplicativo3.textContent = 'Se errar o Ralph perderá 1 vida.'
+
+  let mensagemExplicativo4 = document.createElement('p')
+  mensagemExplicativo4.textContent = 'colete corações e ganhará 1 vida caso ela seja inferior a 5.'
+
+  let buttonInitialize = document.createElement('button')
+  buttonInitialize.textContent = "iniciar Jogo"
+  buttonInitialize.addEventListener("mousedown", () => {
+    modalExplicativo.remove()
+    createButtonReiniciar()
+    initialize()
+    reiniciarGame()
+  })
+
+  modalExplicativo.appendChild(mensagemExplicativo1)
+  modalExplicativo.appendChild(mensagemExplicativo2)
+  modalExplicativo.appendChild(mensagemExplicativo3)
+  modalExplicativo.appendChild(mensagemExplicativo4)
+  modalExplicativo.appendChild(buttonInitialize)
+
+  document.body.appendChild(modalExplicativo)
+
+}
+
 function initialize() {
   addListenerHitBox()
 }
-
-initialize()
