@@ -145,6 +145,10 @@
 }
 
 @media (max-width: 769px) {
+  .container {
+    cursor: auto;
+  }
+
   .square {
     height: 95px;
     width: 95px;
@@ -178,5 +182,9 @@
 
   #cursor {
     opacity: 0;
+  }
+
+  .lock {
+    cursor: auto;
   }
 }
