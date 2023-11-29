@@ -48,7 +48,7 @@ function PersonagemAleatorio() {
     return "girl";
   }
   
-  else if (chance <= 0.03) {
+  else if (chance <= 0.03 && state.values.live < 4) {
     return "heart"
   }
   
@@ -117,11 +117,10 @@ function addListenerHitBox() {
         timeRandom = intervaloAleatorio()
       }
 
-      else if (square.id === state.values.hitPosition && square.classList.contains("heart") && state.values.live < 5) {
-        if (state.values.live < 5) {
-          state.values.live++
-          state.view.lives.textContent = state.values.live
-        }
+      else if (square.id === state.values.hitPosition && square.classList.contains("heart")) {
+
+        state.values.live++
+        state.view.lives.textContent = state.values.live
 
         playSound("heart")
         square.classList.remove("heart")
@@ -222,7 +221,7 @@ function modalExplicativo() {
   mensagemExplicativo3.textContent = 'Se errar o Ralph perderá 1 vida.'
 
   let mensagemExplicativo4 = document.createElement('p')
-  mensagemExplicativo4.textContent = 'colete corações e ganhará 1 vida caso ela seja inferior a 5.'
+  mensagemExplicativo4.textContent = 'colete corações e ganhará 1 vida se ela for inferior a 4.'
 
   let buttonInitialize = document.createElement('button')
   buttonInitialize.textContent = "iniciar Jogo"
