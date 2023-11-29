@@ -16,7 +16,7 @@ const state = {
     live: 3,
   },
   actions: {
-    timerId: setInterval(randomSquare, 500),
+    timerId: setInterval(randomSquare, 800),
     countDownTimerId: setInterval(countDown, 1000),
     buttonReiniciar: document.querySelector("#reiniciar"),
   },
@@ -57,6 +57,29 @@ function countDown() {
   }
 }
 
+function velocidadeGame() {
+  if (state.values.curretTime <= 10) {
+    clearInterval(state.actions.timerId)
+    state.actions.timerId = setInterval(randomSquare, 500)
+  }
+  else if (state.values.curretTime <= 20) {
+    clearInterval(state.actions.timerId)
+    state.actions.timerId = setInterval(randomSquare, 550)
+  }  
+  else if (state.values.curretTime <= 30) {
+    clearInterval(state.actions.timerId)
+    state.actions.timerId = setInterval(randomSquare, 600)
+  }
+  else if (state.values.curretTime <= 40) {
+    clearInterval(state.actions.timerId)
+    state.actions.timerId = setInterval(randomSquare, 650)
+  }
+  else if (state.values.curretTime <= 50) {
+    clearInterval(state.actions.timerId)
+    state.actions.timerId = setInterval(randomSquare, 700)
+  }
+}
+
 function playSound(audioName) {
   let audio = new Audio(`./src/audios/${audioName}.mp3`)
   audio.volume = 0.2
@@ -64,6 +87,7 @@ function playSound(audioName) {
 }
 
 function randomSquare() {
+  velocidadeGame()
   removeClass()
 
   let randomNumber = Math.floor(Math.random() * 9)
@@ -170,7 +194,7 @@ function reiniciarGame() {
     modal.remove()
   }
 
-  state.actions.timerId = setInterval(randomSquare, 500)
+  state.actions.timerId = setInterval(randomSquare, 800)
   state.actions.countDownTimerId = setInterval(countDown, 1000)
   state.view.lock.classList.remove("lock")
 }
