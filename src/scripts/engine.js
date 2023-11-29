@@ -1,4 +1,4 @@
-let timeRandom = 500
+let timeRandom = 700
 const state = {
   view: {
     squares: document.querySelectorAll(".square"),
