@@ -1,4 +1,3 @@
-let timeRandom = 500
 const state = {
   view: {
     squares: document.querySelectorAll(".square"),
@@ -17,7 +16,7 @@ const state = {
     live: 3,
   },
   actions: {
-    timerId: setInterval(randomSquare, timeRandom),
+    timerId: setInterval(randomSquare, 500),
     countDownTimerId: setInterval(countDown, 1000),
     buttonReiniciar: document.querySelector("#reiniciar"),
   },
@@ -33,14 +32,6 @@ document.addEventListener('mousemove', (e) => {
 })
 
 modalExplicativo()
-
-function intervaloAleatorio() {
-  const intervalos = [100, 150, 200,]
-  const indice = Math.floor(Math.random() * intervalos.length)
-  
-  const intervaloSelecionado = intervalos[indice]
-  return intervaloSelecionado  
-}
 
 function PersonagemAleatorio() {
   const chance = Math.random();
@@ -101,7 +92,6 @@ function addListenerHitBox() {
         playSound("hit")
         square.classList.remove("enemy")
         square.classList.add("hit")
-        timeRandom = intervaloAleatorio()
       }
 
       else if (square.id === state.values.hitPosition && square.classList.contains("girl")) {
@@ -114,7 +104,6 @@ function addListenerHitBox() {
         playSound("girlScream")
         square.classList.remove("girl")
         square.classList.add("error")
-        timeRandom = intervaloAleatorio()
       }
 
       else if (square.id === state.values.hitPosition && square.classList.contains("heart")) {
@@ -125,7 +114,6 @@ function addListenerHitBox() {
         playSound("heart")
         square.classList.remove("heart")
         square.classList.add("hit")
-        timeRandom = intervaloAleatorio()
       }
 
       else {
@@ -133,7 +121,6 @@ function addListenerHitBox() {
         state.view.lives.textContent = state.values.live
         playSound('error')
         square.classList.add("error")
-        timeRandom = intervaloAleatorio()
         verifyLives()
       }
     })
