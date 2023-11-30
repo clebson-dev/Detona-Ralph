@@ -37,7 +37,7 @@
 
 .enemy {
   background-image: url("../images/ralph.png");
-  background-size: cover;
+  background-size: contain;
 }
 
 .girl {
