@@ -57,7 +57,7 @@
 
 .heart {
   background-image: url(../images/heart.png);
-  background-size: cover;
+  background-size: contain;
   margin: auto;
 }
 
