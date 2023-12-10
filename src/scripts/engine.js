@@ -80,9 +80,9 @@ function velocidadeGame() {
   }
 }
 
-function playSound(audioName) {
+function playSound(audioName, audioVolume = 0.5) {
   let audio = new Audio(`./src/audios/${audioName}.mp3`)
-  audio.volume = 0.2
+  audio.volume = audioVolume
   audio.play()
 }
 
@@ -98,11 +98,7 @@ function randomSquare() {
 
 function removeClass() {
   state.view.squares.forEach((square) => {
-    square.classList.remove("error")
-    square.classList.remove("enemy")
-    square.classList.remove("girl")
-    square.classList.remove("heart")
-    square.classList.remove("hit")
+    square.classList.remove("error", "enemy", "girl", "heart", "hit")
   })
 }
 
@@ -143,7 +139,7 @@ function addListenerHitBox() {
       else {
         state.values.live--
         state.view.lives.textContent = state.values.live
-        playSound('error')
+        playSound('error', 1)
         square.classList.add("error")
         verifyLives()
       }
@@ -181,6 +177,8 @@ function gameEnd() {
 }
 
 function reiniciarGame() {
+  playSound("button")
+  
   state.values.curretTime = 60
   state.values.result = 0
   state.values.live = 3
@@ -206,6 +204,7 @@ function createButtonReiniciar() {
   buttonReiniciar.textContent = "Reiniciar Jogo"
   buttonReiniciar.id = "reiniciar"
   buttonReiniciar.addEventListener("mousedown",()=> {
+    playSound("button")
     gameEnd()
   })
 
@@ -216,8 +215,6 @@ function modalExplicativo() {
   clearInterval(state.actions.countDownTimerId)
   clearInterval(state.actions.timerId)
   removeClass()
-
-
 
   let modalExplicativo = document.createElement('div')
   modalExplicativo.classList.add('modalExplicativo')
@@ -241,6 +238,7 @@ function modalExplicativo() {
     createButtonReiniciar()
     initialize()
     reiniciarGame()
+    playSound("button")
   })
 
   modalExplicativo.appendChild(mensagemExplicativo1)
@@ -253,6 +251,14 @@ function modalExplicativo() {
 
 }
 
+function musicGame() {
+  const musicGame = new Audio(`./src/audios/children-electro-swing.mp3`)
+  musicGame.volume = 0.05
+  musicGame.loop = true
+  musicGame.play()
+}
+
 function initialize() {
+  musicGame()
   addListenerHitBox()
 }
